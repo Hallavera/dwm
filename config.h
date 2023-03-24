@@ -157,6 +157,7 @@ static Key keys[] = {
   { MODKEY,			XK_equal,	spawn,		SHCMD("mpc volume +5") },
 	{ MODKEY|ShiftMask,		XK_equal,	spawn,		SHCMD("pamixer --allow-boost -i 15; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_BackSpace,	spawn,		SHCMD("sysact") },
+	{ MODKEY,			XK_z,	spawn,		SHCMD("yt2mp") },
 	{ MODKEY|ShiftMask,			XK_s,	spawn,		SHCMD("signal-desktop") },
 	{ MODKEY|ShiftMask,		XK_BackSpace,	spawn,		SHCMD("sysact") },
 
@@ -165,10 +166,11 @@ static Key keys[] = {
 	{ MODKEY,			XK_q,		killclient,	{0} },
 	{ MODKEY|ShiftMask,		XK_q,		quit,		{0} },
 	{ MODKEY,			XK_w,		spawn,		SHCMD("$BROWSER") },
-	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
+	// { MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD(TERMINAL " -e sudo nmtui") },
+	{ MODKEY|ShiftMask,		XK_w,		spawn,		SHCMD("chrome") },
 	{ MODKEY,			XK_e,		spawn,		SHCMD(TERMINAL " -e calcurse") },
 	{ MODKEY|ShiftMask,		XK_e,		spawn,		SHCMD(TERMINAL " -e abook -C ~/.config/abook/abookrc --datafile ~/.config/abook/addressbook") },
-	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL " -e lfub &") },
+	{ MODKEY,			XK_r,		spawn,		SHCMD(TERMINAL "st && -e lfcd") },
 	{ MODKEY|ShiftMask,		XK_r,		spawn,		SHCMD(TERMINAL " -e htop") },
 	{ MODKEY,			XK_t,		setlayout,	{.v = &layouts[0]} }, /* tile */
 	{ MODKEY|ShiftMask,		XK_t,		setlayout,	{.v = &layouts[1]} }, /* bstack */
@@ -213,9 +215,9 @@ static Key keys[] = {
 	{ MODKEY,			XK_Return,	spawn,		{.v = termcmd } },
 	{ MODKEY|ShiftMask,		XK_Return,	togglescratch,	{.ui = 0} },
 
-	{ MODKEY,			XK_z,		incrgaps,	{.i = +3 } },
+	{ MODKEY|ShiftMask,			XK_z,		incrgaps,	{.i = +3 } },
 	/* { MODKEY|ShiftMask,		XK_z,		spawn,		SHCMD("") }, */
-	{ MODKEY,			XK_x,		incrgaps,	{.i = -3 } },
+	{ MODKEY|ShiftMask,			XK_x,		incrgaps,	{.i = -3 } },
 	/* { MODKEY|ShiftMask,		XK_x,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_c,		spawn,		SHCMD(TERMINAL " -e tremc") },
 	/* { MODKEY|ShiftMask,		XK_c,		spawn,		SHCMD("") }, */
@@ -224,7 +226,7 @@ static Key keys[] = {
 	/* { MODKEY|ShiftMask,		XK_b,		spawn,		SHCMD("") }, */
 	{ MODKEY,			XK_n,		spawn,		SHCMD(TERMINAL " -e nvim -c VimwikiIndex") },
 	{ MODKEY|ShiftMask,		XK_n,		spawn,		SHCMD(TERMINAL " -e newsboat; pkill -RTMIN+6 dwmblocks") },
-  { MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL " -e ncmpcpp") },
+  { MODKEY,			XK_m,		spawn,		SHCMD(TERMINAL "/usr/local/scripts/music_setup") },
 	{ MODKEY|ShiftMask,		XK_m,		spawn,		SHCMD("pamixer -t; kill -44 $(pidof dwmblocks)") },
 	{ MODKEY,			XK_comma,	spawn,		SHCMD("mpc prev") },
 	{ MODKEY|ShiftMask,		XK_comma,	spawn,		SHCMD("mpc seek 0%") },
@@ -247,6 +249,7 @@ static Key keys[] = {
 	{ MODKEY,			XK_F3,		spawn,		SHCMD("displayselect") },
 	{ MODKEY,			XK_F4,		spawn,		SHCMD(TERMINAL " -e pulsemixer; kill -44 $(pidof dwmblocks)") },
 	/* { MODKEY,			XK_F5,		xrdb,		{.v = NULL } }, */
+	{ MODKEY,			XK_F5,		spawn,		SHCMD("auto_displayselect")  }, 
 	{ MODKEY,			XK_F6,		spawn,		SHCMD("torwrap") },
 	{ MODKEY,			XK_F7,		spawn,		SHCMD("td-toggle") },
 	{ MODKEY,			XK_F8,		spawn,		SHCMD("mw -Y") },
@@ -346,6 +349,7 @@ static Button buttons[] = {
 static Signal signals[] = {
 	/* signum       function        argument  */
 	{ 1,            setlayout,      {.v = 0} },
+	{ 2,			         spawn,		 SHCMD(TERMINAL "  -e ncmpcpp") },
 	{ 69,			      setmfact,      	{.f = +0.05} },
 	{ 420,			       spawn,		    {.v = termcmd } },
 };
